@@ -13,6 +13,6 @@ geneSA(genename = NULL, event = NULL)
 a log-rank test in univariate Cox regression analysis with a proportional hazards model is performed to examine the association between the expression of each gene and the survival rates of patients. Genes with Q-value <= 0.05 (Benjamini-Hocberg procedure) are preserved. For further information on requirements as well as how to implement this tool, please visit my Github repository: https://github.com/huynguyen250896/geneSA
 }
 \examples{
-geneSA(cna = vt, exp1 = df)
+geneSA(genename = vt, event = df)
 
 }
