@@ -8,7 +8,7 @@ Description: a log-rank test in univariate Cox regression analysis with a propor
     hazards model is performed to examine the association between the expression of each 
     gene and the survival rates of patients. Genes with Q-value <= 0.05 (Benjamini-Hocberg 
     procedure) are preserved.
-License: GPL-2
+License: MIT license
 Depends:
     R (>= 3.1.0)
 Suggests:
