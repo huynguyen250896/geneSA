@@ -32,7 +32,7 @@ Please kindly cite the two repositories if you use the code, datasets or any res
 }
 ```
 </br> And </br>
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3686391.svg)](https://doi.org/10.5281/zenodo.3829388)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3829388.svg)](https://doi.org/10.5281/zenodo.3829388)
 ```sh
 @software{nguyen_quang_huy_2020_3829388,
   author       = {Nguyen, Quang-Huy},
