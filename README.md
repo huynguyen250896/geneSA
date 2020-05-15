@@ -36,7 +36,7 @@ Please kindly cite the two repositories if you use the code, datasets or any res
 ```sh
 @software{nguyen_quang_huy_2020_3829388,
   author       = {Nguyen, Quang-Huy},
-  title        = {huynguyen250896/geneSA: GeneSA v0.1.0},
+  title        = {huynguyen250896/geneSA: GeneSA v 0.1.0},
   month        = may,
   year         = 2020,
   publisher    = {Zenodo},
