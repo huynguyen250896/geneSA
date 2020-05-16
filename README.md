@@ -22,7 +22,7 @@ Please kindly cite the two repositories if you use the code, datasets or any res
 ```sh
 @software{quang_huy_nguyen_2020_3686388,
   author       = {Nguyen, Quang-Huy},
-  title        = {huynguyen250896/computeQ: v 0.1.0},
+  title        = {huynguyen250896/computeQ: computeQ v 0.1.0},
   month        = feb,
   year         = 2020,
   publisher    = {Zenodo},
