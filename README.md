@@ -1,6 +1,6 @@
 # geneSA v0.1.0
 #### I. Introduction
-The package geneSA is built to serve as a support tool for the paper "A workflow for identification and analysis of driver genes using an integrative analysis of a multiomics dataset". A log-rank test in univariate Cox regression analysis with a proportional hazards model is performed to examine the association between the expression of each gene and the survival rates of patients, and then compute Q-value (Benjamini-Hochberg procedure) using the function computeQ for the package [computeQ](https://github.com/huynguyen250896/computeQ) based on the previously identified p-values. Genes with Q-value <= 0.05 are preserved. </br> 
+The package geneSA is built to serve as a support tool for the paper "An improved protocol for identification and analysis of driver genes using multi-omics data". A log-rank test in univariate Cox regression analysis with a proportional hazards model is performed to examine the association between the expression of each gene and the survival rates of patients, and then compute Q-value (Benjamini-Hochberg procedure) using the function computeQ for the package [computeQ](https://github.com/huynguyen250896/computeQ) based on the previously identified p-values. Genes with Q-value <= 0.05 are preserved. </br> 
 
 
 #### IV. Implementation
