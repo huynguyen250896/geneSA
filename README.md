@@ -6,7 +6,7 @@ The package geneSA is built to serve as a support tool for the paper "An improve
 You must preprare the two kinds of the following data: *vt* and *df* (see the 'III.Implementation' section) </br> 
 vt: a vector comprises genes of interest that you want to perform an survival analysis association with them individually </br> 
 df: a data frame comprises its rows are patients, its columns are genes of interest (the same as *vt*). NOTE that, the two last columns must essentially be survival times of patients and survival status of patients (binary variable) </br> 
-Please download an example data [Dataset.zip](https://github.com/huynguyen250896/geneSA/blob/master/Dataset.zip) to well grasp GeneSA's requirement on data structure </br> 
+Please download example datasets [Dataset.zip](https://github.com/huynguyen250896/geneSA/blob/master/Dataset.zip) to well grasp GeneSA's requirement on data structure </br> 
 
 #### III. Implementation
 Use the following command to install directly from GitHub;
