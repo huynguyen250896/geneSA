@@ -26,6 +26,5 @@ Please kindly cite the two repositories if you use the code, datasets or any res
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3872669.svg)](https://doi.org/10.5281/zenodo.3872669)
 ```sh
 ...
-}
 ```
 Feel free to contact [Quang-Huy Nguyen](https://github.com/huynguyen250896) <huynguyen96.dnu AT gmail DOT com> for any questions about the code and results.
