@@ -23,7 +23,6 @@ geneSA(genename = vt, event = df)
 ```
 #### IV. Citation
 Please kindly cite the two repositories if you use the code, datasets or any results in this repo: </br>
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3872669.svg)](https://doi.org/10.5281/zenodo.3872669)
 ```sh
 ...
 ```
