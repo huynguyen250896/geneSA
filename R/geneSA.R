@@ -62,6 +62,7 @@ geneSA = function(genename=NULL, event=NULL){
   }
   cc = read.table("gene_SA.txt", sep="\t", check.names = FALSE, row.names = 1, header = TRUE)
   cc = cc[,-c(1,5)] #remove the two unnescessary columns: No. and rank
+  cc = cc %>% subset(P.value <= 0.05) #only retain Genes with P <=0.05
   cc = cc %>% subset(Q.value <= 0.05) #only retain Genes with Q <=0.05
   View(cc)
   write.table(cc,"gene_SA.txt",sep = "\t", quote = FALSE)
