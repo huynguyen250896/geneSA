@@ -44,7 +44,7 @@ geneSA = function(genename=NULL, event=NULL){
              })
 
 
-  df2 =  list.filter(df1, logtest[["pvalue"]] < 0.05) #preserve genes with P<=0.05
+  df2 =  list.filter(df1) #extract results as a list
 
   cc = data.frame(No. = paste("Gene ",1:length(df2)), HR=NA, confidence_intervals=NA, P.value=NA)
 
