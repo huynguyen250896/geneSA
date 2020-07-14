@@ -22,7 +22,7 @@ running example:
 geneSA(genename = vt, event = df)
 ```
 #### IV. Citation
-Please kindly cite the following paper if you use the code, datasets or any results in this repo: </br>
+Please kindly cite the following paper and Star (and Fork, if can) this Github repository if you use the tool in this repo: </br>
 ```sh
 ...
 ```
