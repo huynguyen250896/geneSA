@@ -22,18 +22,21 @@ geneSA = function(genename=NULL, event=NULL){
   }
 
   #library
-  devtools::install_github("huynguyen250896/computeQ")
-  if(!require(survival)) install.packages('survival')
   if(!require(rlist)) install.packages("https://cran.r-project.org/src/contrib/Archive/rlist/rlist_0.4.tar.gz", repos = NULL)
-  library(computeQ)
-  library('survival')
+  library(survival)
   library(rlist)
   library(dplyr)
   library(tidyverse)
   library(tidyr)
+  
+  #define the computeQ function, adjusting the log-rank P-values following Benjamini-Hochberg FDR
+  computeQ <- function(x)
+  {
+  (x$P.value*nrow(x))/(x$rank)
+  }
 
   #run SA
-  set.seed(420)
+  set.seed(2581996)
   df1=lapply(genename,
 
              function(x) {
