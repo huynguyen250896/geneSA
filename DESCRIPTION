@@ -15,8 +15,7 @@ Suggests:
     dplyr,
     tidyr,
     tidyverse,
-    survival,
-    rlist
+    survival
 Encoding: UTF-8
 LazyData: true
 Imports:
