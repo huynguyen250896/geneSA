@@ -22,9 +22,7 @@ geneSA = function(genename=NULL, event=NULL){
   }
 
   #library
-  if(!require(rlist)) install.packages("https://cran.r-project.org/src/contrib/Archive/rlist/rlist_0.4.tar.gz", repos = NULL)
   library(survival)
-  library(rlist)
   library(dplyr)
   library(tidyverse)
   library(tidyr)
@@ -46,19 +44,16 @@ geneSA = function(genename=NULL, event=NULL){
                summary(coxFit)
              })
 
+  cc = data.frame(No. = paste("Gene ",1:length(df1)), HR=NA, confidence_intervals=NA, P.value=NA)
 
-  df2 =  list.filter(df1) #extract results as a list
-
-  cc = data.frame(No. = paste("Gene ",1:length(df2)), HR=NA, confidence_intervals=NA, P.value=NA)
-
-  for (i in c(1:length(df2))) {
-    cc$HR[i] = round(df2[[i]][["coefficients"]][2],3) #hazard ratio
-    cc$confidence_intervals[i] = paste(round(df2[[i]][["conf.int"]][[3]],3), "-", round(df2[[i]][["conf.int"]][[4]],3)) #95% CI
-    cc$P.value[i] = df2[[i]][["logtest"]][3] #P-value
-    rownames(cc)[i] =rownames(df2[[i]][["conf.int"]])
+  for (i in c(1:length(df1))) {
+    cc$HR[i] = round(df1[[i]][["coefficients"]][2],3) #hazard ratio
+    cc$confidence_intervals[i] = paste(round(df1[[i]][["conf.int"]][[3]],3), "-", round(df1[[i]][["conf.int"]][[4]],3)) #95% CI
+    cc$P.value[i] = df1[[i]][["logtest"]][3] #P-value
+    rownames(cc)[i] =rownames(df1[[i]][["conf.int"]])
     order.pvalue = order(cc$P.value)
     cc = cc[order.pvalue,] #re-order rows following p-value
-    cc$rank = c(1:length(df2)) #rank of P.value
+    cc$rank = c(1:length(df1)) #rank of P.value
     cc$Q.value = computeQ(cc) #compute Q-value
     rownames(cc) <- gsub("up","",rownames(cc)) #remove the word "up" in row names
     write.table(cc,"gene_SA.txt",sep = "\t", quote = FALSE)
