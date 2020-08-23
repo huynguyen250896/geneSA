@@ -16,8 +16,7 @@ Suggests:
     tidyr,
     tidyverse,
     survival,
-    rlist,
-    computeQ
+    rlist
 Encoding: UTF-8
 LazyData: true
 Imports:
