@@ -63,6 +63,6 @@ geneSA = function(genename=NULL, event=NULL){
   View(cc)
   write.table(cc,"gene_SA.txt",sep = "\t", quote = FALSE)
   
-    #warning
+   #warning
   print(writeLines("\nNOTE: \n*gene_SA.txt placed in your current working directory.\n*Please check to identify which genes significantly associated with prognostic value (survival rates of patients).\n*In any case, the numerator is up-expression level and the denominator is down-expression level. In other words, the down-expression level of genes considered is the reference."))
 }
