@@ -60,7 +60,6 @@ geneSA = function(genename=NULL, event=NULL){
   cc = dplyr::select(cc, -No.) #remove the 'No.' column  
   cc = cc %>% subset(P.value <= 0.05) #only retain Genes with P <=0.05
   cc = cc %>% subset(Q.value <= 0.05) #only retain Genes with Q <=0.05
-  View(cc)
   write.table(cc,"gene_SA.txt",sep = "\t", quote = FALSE)
   
    #warning
