@@ -7,7 +7,7 @@ The package geneSA is built to serve as a support tool for the paper "*Improving
 ---
 You must preprare the two kinds of the following data: *vt* and *df* (see the 'III.Implementation' section). </br> 
 vt: a vector comprises genes of interest that you want to perform a survival association analysis with them individually. </br> 
-df: a data frame (e.g., gene expression data) comprises its rows are patients, its columns are genes of interest (the same as *vt*), its elements are gene expression levels (categorical variable: 1 = up-regulated, 0 = down-regulated, for example). NOTE that, the two last columns must essentially be (1) Overall Survival times of patients (continuous variables) and (2) Overall Survival status of patients (dichotomized variable: 1=death, 0 = alive). Alternatively, you can use DNA copy number alteration data or DNA methylation data or anything else (NOTE: categorical variable required) </br> 
+df: a data frame (e.g., gene expression data) comprises its rows are patients, its columns are genes of interest (order of individual genes in *df* is the same as that in *vt*), its elements are gene expression levels (categorical variable: 1 = up-regulated, 0 = down-regulated, for example). NOTE that, the two last columns must essentially be (1) Overall Survival times of patients (continuous variables) and (2) Overall Survival status of patients (dichotomized variable: 1=death, 0 = alive). Alternatively, you can use DNA copy number alteration data or DNA methylation data or anything else (NOTE: categorical variable required) </br> 
 Please download datasets [Dataset.zip](https://github.com/huynguyen250896/geneSA/blob/master/Dataset.zip) as examples to well grasp GeneSA's requirement on data structure. </br> 
 
 #### III. Pipeline
