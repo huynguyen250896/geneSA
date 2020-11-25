@@ -1,7 +1,7 @@
 # geneSA v0.1.1
 #### I. Introduction
 ---
-The package geneSA is built to serve as a support tool for the paper "*Improving existing analysis pipeline to identify and analyze cancer driver genes using multi-omics data*". </br> A log-rank test in univariate Cox regression analysis with a proportional hazards model is performed to examine an association between each gene and the survival rates of patients separately, and then adjust identified log-rank P-values following Benjamini-Hochberg FDR. Genes with adjusted log-rank P-values (also known as Q-values) <= 0.05 are preserved. </br> 
+The package geneSA is built to serve as a support tool for the paper "*[Improving existing analysis pipeline to identify and analyze cancer driver genes using multi-omics data](https://www.nature.com/articles/s41598-020-77318-1)*". </br> A log-rank test in univariate Cox regression analysis with a proportional hazards model is performed to examine an association between each gene and the survival rates of patients separately, and then adjust identified log-rank P-values following Benjamini-Hochberg FDR. Genes with adjusted log-rank P-values (also known as Q-values) <= 0.05 are preserved. </br> 
 
 #### II. Data Struture 
 ---
@@ -33,6 +33,17 @@ geneSA(genename = vt, event = df)
 ---
 Please kindly cite the following paper (and Star this Github repository if you find this tool of interest) if you use the tool in this repo: </br>
 ```sh
-...
+Reference Type: Journal Article
+Author: Nguyen, Quang-Huy
+Le, Duc-Hau
+Year: 2020
+Title: Improving existing analysis pipeline to identify and analyze cancer driver genes using multi-omics data
+Journal: Scientific Reports
+Volume: 10
+Issue: 1
+Pages: 20521
+Date: 2020/11/25
+ISSN: 2045-2322
+DOI: 10.1038/s41598-020-77318-1
 ```
 Feel free to contact [Quang-Huy Nguyen](https://github.com/huynguyen250896) <huynguyen96.dnu AT gmail DOT com> for any questions about the code and results.
