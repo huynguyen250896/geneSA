@@ -3,11 +3,20 @@
 ---
 The package geneSA is built to serve as a support tool for the paper "*[Improving existing analysis pipeline to identify and analyze cancer driver genes using multi-omics data](https://www.nature.com/articles/s41598-020-77318-1)*". </br> A log-rank test in univariate Cox regression analysis with a proportional hazards model is performed to examine an association between each gene and the survival rates of patients separately, and then adjust identified log-rank P-values following Benjamini-Hochberg FDR. Genes with adjusted log-rank P-values (also known as Q-values) <= 0.05 are preserved. </br> 
 
-#### II. Data Struture 
+#### II. Understanding the tool
 ---
-You must preprare the two kinds of the following data: *vt* and *df* (see the 'III.Implementation' section). </br> 
-vt: a vector comprises genes of interest that you want to perform a survival association analysis with them individually. </br> 
-df: a data frame (e.g., gene expression data) comprises its rows are patients, its columns are genes of interest (order of individual genes in *df* is the same as that in *vt*), its elements are gene expression levels (categorical variable: 1 = up-regulated, 0 = down-regulated, for example). NOTE that, the two last columns must essentially be (1) Overall Survival times of patients (continuous variables) and (2) Overall Survival status of patients (dichotomized variable: 1=death, 0 = alive). Alternatively, you can use DNA copy number alteration data or DNA methylation data or anything else (NOTE: categorical variable required) </br> 
+The following are parameters provided by geneSA: </br> 
+data: frame or matrix. It represents its rows are genomic features and its columns are samples.
+Note that samples in rows of `data` are included in your clinical data and in exactly the same order.
+  
+time: numeric or integer column vector. It is overall survival time of all samples extracted from 
+your clinical data. Note that samples in rows of clinical data are included in `data` and in exactly the 
+same order before extracting it.
+
+status: binary column vector. It is overall survival status of all samples extracted from your clinical 
+data (usually coded as 1 = death, 2 = alive). Note that samples in rows of clinical data are included in `data` and 
+in exactly the same order before extracting it.
+
 Please download datasets [Dataset.zip](https://github.com/huynguyen250896/geneSA/blob/master/Dataset.zip) as examples to well grasp GeneSA's requirement on data structure. </br> 
 
 #### III. Pipeline
@@ -27,7 +36,7 @@ library(geneSA)
 ```
 running example:
 ```sh
-geneSA(genename = vt, event = df)
+geneSA(data = exp1, time = clinical_exp$OS_MONTHS, status = clinical_exp$status)
 ```
 #### V. Citation
 ---
