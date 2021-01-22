@@ -10,9 +10,10 @@ The following are parameters provided by geneSA:
 - data: frame or matrix. It represents its rows are genomic features and its columns are samples.
 Note that samples in rows of `data` are included in your clinical data and in exactly the same order.
 Users can feed any -omics data to this parameter; e.g., gene expression, copy number alteration,
-methylation, or the like. Note that you must pre-define labels of input data. For example, expresison levels 
-of genes usually are coded as highly expressed genes ("up") and lowly expressed genes ("down"), or 
-as highly expressed genes ("up"), moderately expressed genes ("mid), and lowly expressed genes ("down").
+methylation, or the like. NOTE that you must code values/observations in input data as labels in advance. 
+For example, expresison levels of genes usually are divided into highly expressed genes ("up") and lowly 
+expressed genes ("down"), or as highly expressed genes ("up"), moderately expressed genes ("mid), and 
+lowly expressed genes ("down").
   
 - time: numeric or integer column vector. It is overall survival time of all samples extracted from 
 your clinical data. Note that samples in rows of clinical data are included in `data` and in exactly the 
