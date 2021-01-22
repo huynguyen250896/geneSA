@@ -2,17 +2,40 @@
 % Please edit documentation in R/geneSA.R
 \name{geneSA}
 \alias{geneSA}
-\title{Tool for Identification of genes significantly associated with prognostic value (survival rates of patients)}
+\title{geneSA: Identification of genes significantly associated with patient outcome.}
 \usage{
-geneSA(genename = NULL, event = NULL)
+computeC(data, time, status)
 }
 \arguments{
-\item{genename, event}{}
-}
-\description{
-a log-rank test in univariate Cox regression analysis with a proportional hazards model is performed to examine the association between the expression of each gene and the survival rates of patients. Genes with Q-value <= 0.05 (Benjamini-Hocberg procedure) are preserved. For further information on requirements as well as how to implement this tool, please visit my Github repository: https://github.com/huynguyen250896/geneSA
-}
-\examples{
-geneSA(genename = vt, event = df)
+\item{data}{data frame or matrix. It represents its rows are genomic features and its columns are samples.
+Note that samples in rows of \code{data} are included in your clinical data and in exactly the same order.}
+  
+\item{time}{time numeric or integer column vector. It is overall survival time of all samples extracted from 
+your clinical data. Note that samples in rows of clinical data are included in \code{data} and in exactly the 
+same order before extracting it.}
 
+\item{status}{binary column vector. It is overall survival status of all samples extracted from your clinical 
+data (coded 1 = death, 2 = alive). Note that samples in rows of clinical data are included in \code{data} and 
+in exactly the same order before extracting it.}
+}
+
+\description{
+a log-rank test in univariate Cox regression analysis with a proportional hazards model is performed to examine 
+the association between each gene and patient outcome. Genes with Q-value <= 0.05 (Benjamini-Hocberg procedure) 
+are preserved. More detailed information on requirements of as well as how to implement this tool, please visit my 
+Github repository: https://github.com/huynguyen250896/geneSA
+}
+
+\examples{
+geneSA(data = exp1, time = clinical_exp$OS_MONTHS, status = clinical_exp$status)
+}
+
+\references{
+Quang-Huy Nguyen, Duc-Hau Le. (2020). 
+Improving existing analysis pipeline to identify and analyze cancer driver genes using multi-omics data.
+Scientific Reports, 10(1):20521.
+}  
+  
+\author{
+Quang-Huy Nguyen
 }
