@@ -7,7 +7,7 @@ The package geneSA is built to serve as a support tool for the paper "*[Improvin
 ---
 The following are parameters provided by geneSA:
 
-- data: frame or matrix. It represents its rows are genomic features and its columns are samples.
+- data: data frame or matrix. It represents its rows are genomic features and its columns are samples.
 Note that samples in rows of `data` are included in your clinical data and in exactly the same order.
 Users can feed any -omics data to this parameter; e.g., gene expression, copy number alteration,
 methylation, or the like. NOTE that you must code values/observations in `data` as labels in advance. 
