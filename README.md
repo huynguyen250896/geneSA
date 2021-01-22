@@ -5,15 +5,16 @@ The package geneSA is built to serve as a support tool for the paper "*[Improvin
 
 #### II. Understanding the tool
 ---
-The following are parameters provided by geneSA: </br> 
-data: frame or matrix. It represents its rows are genomic features and its columns are samples.
+The following are parameters provided by geneSA:
+
+- data: frame or matrix. It represents its rows are genomic features and its columns are samples.
 Note that samples in rows of `data` are included in your clinical data and in exactly the same order.
   
-time: numeric or integer column vector. It is overall survival time of all samples extracted from 
+- time: numeric or integer column vector. It is overall survival time of all samples extracted from 
 your clinical data. Note that samples in rows of clinical data are included in `data` and in exactly the 
 same order before extracting it.
 
-status: binary column vector. It is overall survival status of all samples extracted from your clinical 
+- status: binary column vector. It is overall survival status of all samples extracted from your clinical 
 data (usually coded as 1 = death, 2 = alive). Note that samples in rows of clinical data are included in `data` and 
 in exactly the same order before extracting it.
 
