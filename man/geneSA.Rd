@@ -15,8 +15,8 @@ your clinical data. Note that samples in rows of clinical data are included in \
 same order before extracting it.}
 
 \item{status}{binary column vector. It is overall survival status of all samples extracted from your clinical 
-data (coded 1 = death, 2 = alive). Note that samples in rows of clinical data are included in \code{data} and 
-in exactly the same order before extracting it.}
+data (usually coded as 1 = death, 2 = alive). Note that samples in rows of clinical data are included in \code{data} 
+and in exactly the same order before extracting it.}
 }
 
 \description{
