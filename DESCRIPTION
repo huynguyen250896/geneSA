@@ -4,19 +4,18 @@ Title: Tool for Identification of genes significantly associated with prognostic
 Version: 0.1.1
 Author: Quang-Huy Nguyen
 Maintainer: Quang-Huy Nguyen <huynguyen96.dnu@gmail.com>
-Description: a log-rank test in univariate Cox regression analysis with a proportional 
-    hazards model is performed to examine the association between the expression of each 
-    gene and the survival rates of patients. Genes with Q-value <= 0.05 (Benjamini-Hocberg 
-    procedure) are preserved.
+Description: a log-rank test in univariate Cox regression analysis with a proportional hazards model is performed to examine 
+    the association between each gene and patient outcome. Genes with Q-value <= 0.05 (Benjamini-Hocberg procedure) 
+    are preserved.
 License: MIT license
 Depends:
-    R (>= 3.1.0)
-Suggests:
+    R (>= 3.5.0)
+Imports:
     dplyr,
-    tidyr,
-    tidyverse,
     survival
+Remotes:
+    cran::dplyr,
+    cran::survival
 Encoding: UTF-8
 LazyData: true
-Imports:
 RoxygenNote: 7.1.0
