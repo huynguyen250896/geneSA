@@ -6,7 +6,7 @@
 #'
 #' @author Quang-Huy Nguyen
 #'
-#' @usage computeC(data, time, status)
+#' @usage geneSA(data, time, status)
 #'
 #' @param data data frame or matrix. It represents its rows are genomic features and its columns are samples.
 #' Note that samples in rows of \code{data} are included in your clinical data and in exactly the same order.
