@@ -21,7 +21,7 @@ Please download datasets [Dataset.zip](https://github.com/huynguyen250896/geneSA
 
 #### III. Pipeline
 ---
-![Figure](https://imgur.com/pvuJx9C.png)
+![Figure](https://imgur.com/hLlsaSl.png)
 **Figure:** Pipeline of the package geneSA.
 
 #### IV. Implementation
