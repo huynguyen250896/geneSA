@@ -18,7 +18,7 @@ same order before extracting it.
 data (usually coded as 1 = death, 0 = alive). Note that samples in rows of clinical data are included in `data` and 
 in exactly the same order before extracting it.
 
-Please download datasets [Dataset.zip](https://github.com/huynguyen250896/geneSA/blob/master/Dataset.zip) as examples to well grasp GeneSA's requirement on data structure. </br> 
+Please download datasets [data_n_code](https://github.com/huynguyen250896/geneSA/tree/master/data_n_code) as examples to well grasp GeneSA's requirement on data structure. </br> 
 
 #### III. Pipeline
 ---
