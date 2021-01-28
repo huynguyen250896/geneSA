@@ -65,43 +65,121 @@ geneSA = function(data = NULL, time = NULL, status = NULL){
     (x$P.value*nrow(x))/(x$rank)
   }
   
-  #run SA
-  set.seed(25081996)
-  dataset=cbind(data, time, status) %>% as.data.frame()
-  df1=lapply(colnames(data),
-             
-             function(x) {
-               
-               formula <- as.formula(paste('Surv(time,status)~',as.factor(x)))
-               coxFit <- survival::coxph(formula, data = dataset)
-               summary(coxFit)
-             })
-  
-  cc = data.frame(My_name_is = paste("Huy",1:length(df1)), HR=NA, confidence_intervals=NA, P.value=NA)
-  
-  for (i in c(1:length(df1))) {
-    cc$HR[i] = round(df1[[i]][["coefficients"]][2],3) #hazard ratio
-    cc$confidence_intervals[i] = paste(round(df1[[i]][["conf.int"]][[3]],3), "-", round(df1[[i]][["conf.int"]][[4]],3)) #95% CI
-    cc$P.value[i] = df1[[i]][["logtest"]][3] #P-value
-    rownames(cc)[i] =rownames(df1[[i]][["conf.int"]])
-    order.pvalue = order(cc$P.value)
-    cc = cc[order.pvalue,] #re-order rows following p-value
-    cc$rank = c(1:length(df1)) #rank of P.value
-    cc$Q.value = computeQ(cc) #compute Q-value
-    rownames(cc) <- gsub("up","",rownames(cc)) #remove the word "up" in row names
-  }
-  cc=cc[,-1]
-  cc = dplyr::select(cc, -rank) #remove the 'rank' column  
-  cc = cc %>% subset(P.value <= 0.05) #only retain Genes with P <=0.05
-  cc = cc %>% subset(Q.value <= 0.05) #only retain Genes with Q <=0.05
-  write.table(cc,"gene_SA.txt",sep = "\t", quote = FALSE)
-  
   #Messenge
-  if(length(levels(as.factor(dataset[,1]))) <= 2){
-    cat("\n","NOTE:" ,"\n","*gene_SA.txt placed in your current working directory.","\n","*Please check to identify which gene significantly associated with patient outcome.","\n","*In this case, the numerator is", levels(factor(dataset[,1]))[[2]], "and the denominator is", levels(factor(dataset[,1]))[[1]], ". In other words,", levels(factor(dataset[,1]))[[1]], "is considered as the reference group.")
+  if(length(table(as.matrix(data))) == 2){
+    #run SA
+    dataset=cbind(data, time, status) %>% as.data.frame()
+    df1=lapply(colnames(data),
+               
+               function(x) {
+                 
+                 formula <- as.formula(paste('Surv(time,status)~',as.factor(x)))
+                 coxFit <- survival::coxph(formula, data = dataset)
+                 summary(coxFit)
+               })
+    
+    cc = data.frame(My_name_is = paste("Huy",1:length(df1)), HR=NA, confidence_intervals=NA, P.value=NA)
+    
+    for (i in c(1:length(df1))) {
+      cc$HR[i] = round(df1[[i]][["coefficients"]][2],3) #hazard ratio
+      cc$confidence_intervals[i] = paste(round(df1[[i]][["conf.int"]][[3]],3), "-", round(df1[[i]][["conf.int"]][[4]],3)) #95% CI
+      cc$P.value[i] = df1[[i]][["logtest"]][3] #P-value
+      rownames(cc)[i] =rownames(df1[[i]][["conf.int"]])
+      order.pvalue = order(cc$P.value)
+      cc = cc[order.pvalue,] #re-order rows following p-value
+      cc$rank = c(1:length(df1)) #rank of P.value
+      cc$Q.value = computeQ(cc) #compute Q-value
+      rownames(cc) <- gsub(levels(as.factor(dataset[,1]))[[2]],"",rownames(cc)) #remove the word "up" in row names
+    }
+    cc=cc[,-1]
+    cc = dplyr::select(cc, -rank) #remove the 'rank' column  
+    cc = cc %>% subset(P.value <= 0.05) #only retain Genes with P <=0.05
+    cc = cc %>% subset(Q.value <= 0.05) #only retain Genes with Q <=0.05
+    write.table(cc,"gene_SA.txt",sep = "\t", quote = FALSE)
+    
+    #Messenger
+    cat("\n","NOTE:" ,"\n","*gene_SA.txt placed in your current working directory.","\n","*Please check to identify which gene is significantly associated with patient outcome.","\n","*In this case, the numerator is", levels(factor(dataset[,1]))[[2]], "and the denominator is", levels(factor(dataset[,1]))[[1]], ". In other words,", levels(factor(dataset[,1]))[[1]], "is considered as the reference group.")
   } else{
-    for (j in 2:length(levels(as.factor(dataset[,1])))){
-      cat("\n","NOTE:" ,"\n","*gene_SA.txt placed in your current working directory.","\n","*Please check to identify which gene significantly associated with patient outcome.","\n","*In this case, the numerator is", paste(levels(factor(dataset[,1]))[[i]], sep = ","), "and the denominator is", levels(factor(dataset[,1]))[[1]], ". In other words,", levels(factor(dataset[,1]))[[1]], "is considered as the reference group.")
-    }}
+    
+    #run SA
+    dataset=cbind(data, time, status) %>% as.data.frame()
+    
+    #extract value of k at which k^th column that has 3 levels assigned to value, otherwise assigned to value1
+    value = data.frame(My_name_is = paste("Huy",1:ncol(data)), value = NA)
+    value1 = data.frame(My_name_is = paste("Huy",1:ncol(data)), value1 = NA)
+    for (k in 1:ncol(data)){
+      if(length(table(data[,k])) == 3){
+        value$value[[k]] <- k
+      }else{
+        value1$value1[[k]] <- k
+      }
+    }; value = na.omit(value); value1 = na.omit(value1)
+    
+    #relevel
+    for (m in value[,2]){
+      if(all(levels(factor(dataset[, value1[1,2]]))[[2]] != levels(factor(dataset[,m]))[[2]])){
+        factor = c(levels(factor(dataset[,m]))[[1]], levels(factor(dataset[,m]))[[3]], levels(factor(dataset[,m]))[[2]])
+        dataset[,m] <- factor(dataset[,m],
+                              levels = factor)
+      }
+    }
+    
+    df1=lapply(colnames(data),
+               
+               function(x) {
+                 
+                 formula <- as.formula(paste('Surv(time,status)~',as.factor(x)))
+                 coxFit <- survival::coxph(formula, data = dataset)
+                 summary(coxFit)
+               })
+    
+    cc = data.frame(My_name_is = paste("Huy",1:length(df1)), HR1=NA, confidence_intervals1=NA, HR2=NA, confidence_intervals2=NA, P.value=NA)
+    
+    for (i in c(1:length(df1))) {
+      if(length(levels(as.factor(dataset[,i]))) == 2){
+        cc$HR1[i] = round(df1[[i]][["coefficients"]][2],3) #hazard ratio
+        cc$confidence_intervals1[i] = paste(round(df1[[i]][["conf.int"]][[3]],3), "-", round(df1[[i]][["conf.int"]][[4]],3)) #95% CI
+        cc$P.value[i] = df1[[i]][["logtest"]][3] #P-value
+        rownames(cc)[i] =rownames(df1[[i]][["conf.int"]])
+        order.pvalue = order(cc$P.value)
+        cc = cc[order.pvalue,] #re-order rows following p-value
+        cc$rank = c(1:length(df1)) #rank of P.value
+        cc$Q.value = computeQ(cc) #compute Q-value
+        rownames(cc) <- gsub(levels(as.factor(dataset[,i]))[[2]],"",rownames(cc)) #remove the word "up" in row names
+        
+      } else{
+          cc$HR1[i] = round(df1[[i]][["coefficients"]][1,2],3) #hazard ratio 1
+          cc$HR2[i] = round(df1[[i]][["coefficients"]][2,2],3) #hazard ratio 2
+          cc$confidence_intervals1[i] = paste(round(df1[[i]][["conf.int"]][[1,3]],3), "-", round(df1[[i]][["conf.int"]][[1,4]],3)) #95% CI 
+          cc$confidence_intervals2[i] = paste(round(df1[[i]][["conf.int"]][[2,3]],3), "-", round(df1[[i]][["conf.int"]][[2,4]],3)) #95% CI 
+          cc$P.value[i] = df1[[i]][["logtest"]][3] #P-value
+          rownames(cc)[i] =rownames(df1[[i]][["conf.int"]])[[2]]
+          order.pvalue = order(cc$P.value)
+          cc = cc[order.pvalue,] #re-order rows following p-value
+          cc$rank = c(1:length(df1)) #rank of P.value
+          cc$Q.value = computeQ(cc) #compute Q-value
+          rownames(cc) <- gsub(levels(as.factor(dataset[,i]))[[2]],"",rownames(cc)) #remove the word "up" in row names
+      }
+    }
+    
+    cc=cc[,-1]
+    cc = dplyr::select(cc, -rank) #remove the 'rank' column  
+    cc = cc %>% subset(P.value <= 0.05) #only retain Genes with P <=0.05
+    cc = cc %>% subset(Q.value <= 0.05) #only retain Genes with Q <=0.05
+    #rename columns
+    for (h in 1:ncol(data)){
+      if(length(table(data[,h])) == 3){
+        colnames(cc)[1] = paste0("HR_",levels(as.factor(dataset[,h]))[[2]])
+        colnames(cc)[2] = paste0("confidence_intervals_",levels(as.factor(dataset[,h]))[[2]])
+        colnames(cc)[3] = paste0("HR_",levels(as.factor(dataset[,h]))[[3]])
+        colnames(cc)[4] = paste0("confidence_intervals_",levels(as.factor(dataset[,h]))[[3]])
+      }
+    }
+    
+    #Print 
+    write.table(cc,"gene_SA.txt",sep = "\t", quote = FALSE)
+    
+    #Messenger
+      cat("\n","NOTE:" ,"\n","*gene_SA.txt placed in your current working directory.","\n","*Please check to identify which gene is significantly associated with patient outcome.","\n","*In this case, the numerator is", paste(levels(factor(dataset[,value[1,2]]))[[2]], "and", levels(factor(dataset[,value[1,2]]))[[3]]), ", whereas the denominator is", levels(factor(dataset[,value1[1,2]]))[[1]],". In other words,", levels(factor(dataset[,value1[1,2]]))[[1]], "is considered as the reference group.")
+    }
 }
-
