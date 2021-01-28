@@ -12,7 +12,7 @@ Note that samples in rows of `data` are included in your clinical data and in ex
 Users can feed any -omics data to this parameter; e.g., gene expression, copy number alteration,
 methylation, or the like. NOTE that you must code values/observations in `data` as labels in advance. 
 For example, expresison levels of genes usually are divided into highly expressed genes ("up") and lowly 
-expressed genes ("down"), or into highly expressed genes ("up"), moderately expressed genes ("mid), and 
+expressed genes ("down"), or into highly expressed genes ("up"), moderately expressed genes ("mid"), and 
 lowly expressed genes ("down").
   
 - time: numeric or integer column vector. It is overall survival time of all samples extracted from 
