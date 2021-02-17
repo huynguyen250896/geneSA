@@ -7,8 +7,8 @@
 geneSA(data, time, status)
 }
 \arguments{
-\item{data}{data frame or matrix. It represents its rows are genomic features and its columns are samples.
-Note that samples in rows of \code{data} are included in your clinical data and in exactly the same order.}
+\item{data}{data frame or matrix. It represents its rows are samples and its columns are genomic features.
+Note that samples in rows of \code{data} are also included in your clinical data and in exactly the same order.}
   
 \item{time}{time numeric or integer column vector. It is overall survival time of all samples extracted from 
 your clinical data. Note that samples in rows of clinical data are included in \code{data} and in exactly the 
