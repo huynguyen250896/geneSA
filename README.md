@@ -43,6 +43,16 @@ library(geneSA)
 ```
 running example:
 ```sh
+# create event vector for EXP
+#>median is up-regulated genes and <median is down regulated genes
+exp1 <- apply(exp,2, function(x) ifelse(x > median(x),"up","down")) %>% as.data.frame()
+
+#Make sure samples that in rows of exp1 are also included in rows of clinical_exp and in exactly the same order
+all(rownames(exp1) == rownames(clinical_exp))
+#[1] FALSE
+exp1 = exp1[rownames(clinical_exp),]
+
+#RUN!!!
 geneSA(data = exp1, time = clinical_exp$OS_MONTHS, status = clinical_exp$status)
 ```
 #### V. Citation
