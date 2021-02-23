@@ -43,7 +43,7 @@ library(geneSA)
 ```
 running example:
 ```sh
-# create event vector for EXP
+# exp is a matrix whose rows are samples and columns are genomic features
 #>median is up-regulated genes and <median is down regulated genes
 exp1 <- apply(exp,2, function(x) ifelse(x > median(x),"up","down")) %>% as.data.frame()
 
