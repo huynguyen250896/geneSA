@@ -55,7 +55,13 @@ exp1 = exp1[rownames(clinical_exp),]
 #RUN!!!
 geneSA(data = exp1, time = clinical_exp$OS_MONTHS, status = clinical_exp$status)
 ```
-#### V. Citation
+
+#### V. What's new
+---
+- 2020-01-28: Now users have been able to divide the expression levels of genes over patients/samples into two groups ("up" and "down") or three groups ("up", "mid", "down")
+- 2020-01-22: To be convenient more, I have changed the parameters in the geneSA. 
+
+#### VI. Citation
 ---
 Please kindly cite the following paper (and Star this Github repository if you find this tool of interest) if you use the tool in this repo: </br>
 ```sh
