@@ -58,8 +58,8 @@ geneSA(data = exp1, time = clinical_exp$OS_MONTHS, status = clinical_exp$status)
 
 #### V. What's new
 ---
-- 2020-01-28: Now users have been able to divide the expression levels of genes over patients/samples into two groups ("up" and "down") or three groups ("up", "mid", "down")
-- 2020-01-22: To be convenient more, I have changed the parameters in the geneSA. 
+- 2021-01-28: Now users have been able to divide the expression levels of genes over patients/samples into two groups ("up" and "down") or three groups ("up", "mid", and "down")
+- 2021-01-22: To be convenient more, I have changed the parameters in the geneSA. 
 
 #### VI. Citation
 ---
