@@ -53,7 +53,7 @@ geneSA = function(data = NULL, time = NULL, status = NULL){
   }
   
   if(!(is.numeric(status) | is.integer(status))){
-    stop("Error: Overall survival status must be numeric or integer. NOTE that status should be also as binary. \n")
+    stop("Error: Overall survival status must be numeric or integer. \n")
   }
   
   #library
