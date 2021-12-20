@@ -17,6 +17,12 @@ same order before extracting it.}
 \item{status}{binary column vector. It is overall survival status of all samples extracted from your clinical 
 data (usually coded as 1 = death, 0 = alive). Note that samples in rows of clinical data are included in \code{data} 
 and in exactly the same order before extracting it.}
+
+\item{Pcut}{numeric. A user-defined P-value threshold to define statistical significance level. Default value 
+is P-value <= 0.05.}
+
+\item{Qcut}{numeric. A user-defined Q-value threshold to define statistical significance level. Default value 
+is Q-value <= 0.05.}
 }
 
 \description{
