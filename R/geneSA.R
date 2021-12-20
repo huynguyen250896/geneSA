@@ -19,41 +19,45 @@
 #' data (coded 1 = death, 2 = alive). Note that samples in rows of clinical data are included in \code{data} and 
 #' in exactly the same order before extracting it.
 #'
+#' @param Pcut numeric. A user-defined P-value threshold to define significance. default value is P-value <= 0.05.
+#'
+#' @param Qcut numeric. A user-defined Q-value threshold to define significance. default value is Q-value <= 0.05.
+#'
 #' @return NULL
 #'
 #' @examples geneSA(data = exp1, time = clinical_exp$OS_MONTHS, status = clinical_exp$status)
 #'
 #' @export
 
-geneSA = function(data = NULL, time = NULL, status = NULL){
+function(data = NULL, time = NULL, status = NULL, Pcut = 0.05, Qcut = 0.05){
   
   #Errors
   if(missing(data)){
-    stop("Error: Input data is missing \n")
+    stop("Error: Input data is missing \\n")
   }
   
   if(missing(time)){
-    stop("Error: Overall survival time of all the patients is missing \n")
+    stop("Error: Overall survival time of all the patients is missing \\n")
   }
   
   if(missing(status)){
-    stop("Error: Overall survival status of all the patients is missing \n")
+    stop("Error: Overall survival status of all the patients is missing \\n")
   }
   
   if(nrow(data) != length(time)){
-    stop("Error: Please make sure samples in rows of data are included in your clinical data and in exactly the same order. \n")
+    stop("Error: Please make sure samples in rows of data are included in your clinical data and in exactly the same order. \\n")
   }
   
   if(nrow(data) != length(status)){
-    stop("Error: Please make sure samples in rows of data are included in your clinical data and in exactly the same order. \n")
+    stop("Error: Please make sure samples in rows of data are included in your clinical data and in exactly the same order. \\n")
   }
   
   if(!(is.numeric(time) | is.integer(time))){
-    stop("Error: Overall survival time must be numeric or integer. \n")
+    stop("Error: Overall survival time must be numeric or integer. \\n")
   }
   
   if(!(is.numeric(status) | is.integer(status))){
-    stop("Error: Overall survival status must be numeric or integer. \n")
+    stop("Error: Overall survival status must be numeric or integer. \\n")
   }
   
   #library
@@ -93,12 +97,12 @@ geneSA = function(data = NULL, time = NULL, status = NULL){
     }
     cc=cc[,-1]
     cc = dplyr::select(cc, -rank) #remove the 'rank' column  
-    cc = cc %>% subset(P.value <= 0.05) #only retain Genes with P <=0.05
-    cc = cc %>% subset(Q.value <= 0.05) #only retain Genes with Q <=0.05
-    write.table(cc,"gene_SA.txt",sep = "\t", quote = FALSE)
+    cc = cc %>% subset(P.value <= Pcut) #only retain Genes with P <=0.05
+    cc = cc %>% subset(Q.value <= Qcut) #only retain Genes with Q <=0.05
+    write.table(cc,"gene_SA.txt",sep = "\\t", quote = FALSE)
     
     #Messenger
-    cat("\n","NOTE:" ,"\n","*gene_SA.txt placed in your current working directory.","\n","*Please check to identify which gene is significantly associated with patient outcome.","\n","*In this case, the numerator is", levels(factor(dataset[,1]))[[2]], "and the denominator is", levels(factor(dataset[,1]))[[1]], ". In other words,", levels(factor(dataset[,1]))[[1]], "is considered as the reference group.")
+    cat("\\n","NOTE:" ,"\\n","*gene_SA.txt placed in your current working directory.","\\n","*Please check to identify which gene is significantly associated with patient outcome.","\\n","*In this case, the numerator is", levels(factor(dataset[,1]))[[2]], "and the denominator is", levels(factor(dataset[,1]))[[1]], ". In other words,", levels(factor(dataset[,1]))[[1]], "is considered as the reference group.")
   } else{
     
     #run SA
@@ -148,24 +152,24 @@ geneSA = function(data = NULL, time = NULL, status = NULL){
         rownames(cc) <- gsub(levels(as.factor(dataset[,i]))[[2]],"",rownames(cc)) #remove the word "up" in row names
         
       } else{
-          cc$HR1[i] = round(df1[[i]][["coefficients"]][1,2],3) #hazard ratio 1
-          cc$HR2[i] = round(df1[[i]][["coefficients"]][2,2],3) #hazard ratio 2
-          cc$confidence_intervals1[i] = paste(round(df1[[i]][["conf.int"]][[1,3]],3), "-", round(df1[[i]][["conf.int"]][[1,4]],3)) #95% CI 
-          cc$confidence_intervals2[i] = paste(round(df1[[i]][["conf.int"]][[2,3]],3), "-", round(df1[[i]][["conf.int"]][[2,4]],3)) #95% CI 
-          cc$P.value[i] = df1[[i]][["logtest"]][3] #P-value
-          rownames(cc)[i] =rownames(df1[[i]][["conf.int"]])[[2]]
-          order.pvalue = order(cc$P.value)
-          cc = cc[order.pvalue,] #re-order rows following p-value
-          cc$rank = c(1:length(df1)) #rank of P.value
-          cc$Q.value = computeQ(cc) #compute Q-value
-          rownames(cc) <- gsub(levels(as.factor(dataset[,i]))[[2]],"",rownames(cc)) #remove the word "up" in row names
+        cc$HR1[i] = round(df1[[i]][["coefficients"]][1,2],3) #hazard ratio 1
+        cc$HR2[i] = round(df1[[i]][["coefficients"]][2,2],3) #hazard ratio 2
+        cc$confidence_intervals1[i] = paste(round(df1[[i]][["conf.int"]][[1,3]],3), "-", round(df1[[i]][["conf.int"]][[1,4]],3)) #95% CI 
+        cc$confidence_intervals2[i] = paste(round(df1[[i]][["conf.int"]][[2,3]],3), "-", round(df1[[i]][["conf.int"]][[2,4]],3)) #95% CI 
+        cc$P.value[i] = df1[[i]][["logtest"]][3] #P-value
+        rownames(cc)[i] =rownames(df1[[i]][["conf.int"]])[[2]]
+        order.pvalue = order(cc$P.value)
+        cc = cc[order.pvalue,] #re-order rows following p-value
+        cc$rank = c(1:length(df1)) #rank of P.value
+        cc$Q.value = computeQ(cc) #compute Q-value
+        rownames(cc) <- gsub(levels(as.factor(dataset[,i]))[[2]],"",rownames(cc)) #remove the word "up" in row names
       }
     }
     
     cc=cc[,-1]
     cc = dplyr::select(cc, -rank) #remove the 'rank' column  
-    cc = cc %>% subset(P.value <= 0.05) #only retain Genes with P <=0.05
-    cc = cc %>% subset(Q.value <= 0.05) #only retain Genes with Q <=0.05
+    cc = cc %>% subset(P.value <= Pcut) #only retain Genes with P <=0.05
+    cc = cc %>% subset(Q.value <= Qcut) #only retain Genes with Q <=0.05
     #rename columns
     for (h in 1:ncol(data)){
       if(length(table(data[,h])) == 3){
@@ -177,9 +181,9 @@ geneSA = function(data = NULL, time = NULL, status = NULL){
     }
     
     #Print 
-    write.table(cc,"gene_SA.txt",sep = "\t", quote = FALSE)
+    write.table(cc,"gene_SA.txt",sep = "\\t", quote = FALSE)
     
     #Messenger
-      cat("\n","NOTE:" ,"\n","*gene_SA.txt placed in your current working directory.","\n","*Please check to identify which gene is significantly associated with patient outcome.","\n","*In this case, the numerator is", paste(levels(factor(dataset[,value[1,2]]))[[2]], "and", levels(factor(dataset[,value[1,2]]))[[3]]), ", whereas the denominator is", levels(factor(dataset[,value1[1,2]]))[[1]],". In other words,", levels(factor(dataset[,value1[1,2]]))[[1]], "is considered as the reference group.")
-    }
+    cat("\\n","NOTE:" ,"\\n","*gene_SA.txt placed in your current working directory.","\\n","*Please check to identify which gene is significantly associated with patient outcome.","\\n","*In this case, the numerator is", paste(levels(factor(dataset[,value[1,2]]))[[2]], "and", levels(factor(dataset[,value[1,2]]))[[3]]), ", whereas the denominator is", levels(factor(dataset[,value1[1,2]]))[[1]],". In other words,", levels(factor(dataset[,value1[1,2]]))[[1]], "is considered as the reference group.")
+  }
 }
