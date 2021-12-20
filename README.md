@@ -23,6 +23,12 @@ same order before extracting it.
 data (usually coded as 1 = death, 0 = alive). Note that samples in rows of clinical data are included in `data` and 
 in exactly the same order before extracting it.
 
+- Pcut: numeric. A user-defined P-value threshold to define statistical significance level. Default value is 
+P-value <= 0.05
+
+- Qcut: numeric. A user-defined Q-value threshold to define statistical significance level. Default value is 
+Q-value <= 0.05
+
 Please see & download data [data_n_code](https://github.com/huynguyen250896/geneSA/tree/master/data_n_code) as examples to well grasp the GeneSA's requirement
 on data structure and its usage. </br> 
 
@@ -58,6 +64,7 @@ geneSA(data = exp1, time = clinical_exp$OS_MONTHS, status = clinical_exp$status)
 
 #### V. What's new
 ---
+- 2021-12-21: Now users have been able to define statistical significance level of their choice in relation to P value and Q value. 
 - 2021-01-28: Now users have been able to divide the expression levels of genes over patients/samples into two groups ("up" and "down") or three groups ("up", "mid", and "down")
 - 2021-01-22: To be convenient more, I have changed the parameters in the geneSA. 
 
