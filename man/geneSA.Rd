@@ -33,7 +33,7 @@ Github repository: https://github.com/huynguyen250896/geneSA
 }
 
 \examples{
-geneSA(data = exp1, time = clinical_exp$OS_MONTHS, status = clinical_exp$status)
+geneSA(data = exp1, time = clinical_exp$OS_MONTHS, status = clinical_exp$status, Pcut = 0.05, Qcut = 0.05)
 }
 
 \references{
