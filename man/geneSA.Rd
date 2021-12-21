@@ -4,7 +4,7 @@
 \alias{geneSA}
 \title{geneSA: Identification of genes significantly associated with patient outcome.}
 \usage{
-geneSA(data, time, status)
+geneSA(data, time, status, Pcut, Qcut)
 }
 \arguments{
 \item{data}{data frame or matrix. It represents its rows are samples and its columns are genomic features.
