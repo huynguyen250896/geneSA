@@ -33,31 +33,31 @@ function(data = NULL, time = NULL, status = NULL, Pcut = 0.05, Qcut = 0.05){
   
   #Errors
   if(missing(data)){
-    stop("Error: Input data is missing \\n")
+    stop("Error: Input data is missing \n")
   }
   
   if(missing(time)){
-    stop("Error: Overall survival time of all the patients is missing \\n")
+    stop("Error: Overall survival time of all the patients is missing \n")
   }
   
   if(missing(status)){
-    stop("Error: Overall survival status of all the patients is missing \\n")
+    stop("Error: Overall survival status of all the patients is missing \n")
   }
   
   if(nrow(data) != length(time)){
-    stop("Error: Please make sure samples in rows of data are included in your clinical data and in exactly the same order. \\n")
+    stop("Error: Please make sure samples in rows of data are included in your clinical data and in exactly the same order. \n")
   }
   
   if(nrow(data) != length(status)){
-    stop("Error: Please make sure samples in rows of data are included in your clinical data and in exactly the same order. \\n")
+    stop("Error: Please make sure samples in rows of data are included in your clinical data and in exactly the same order. \n")
   }
   
   if(!(is.numeric(time) | is.integer(time))){
-    stop("Error: Overall survival time must be numeric or integer. \\n")
+    stop("Error: Overall survival time must be numeric or integer. \n")
   }
   
   if(!(is.numeric(status) | is.integer(status))){
-    stop("Error: Overall survival status must be numeric or integer. \\n")
+    stop("Error: Overall survival status must be numeric or integer. \n")
   }
   
   #library
@@ -99,10 +99,10 @@ function(data = NULL, time = NULL, status = NULL, Pcut = 0.05, Qcut = 0.05){
     cc = dplyr::select(cc, -rank) #remove the 'rank' column  
     cc = cc %>% subset(P.value <= Pcut) #only retain Genes with P <=0.05
     cc = cc %>% subset(Q.value <= Qcut) #only retain Genes with Q <=0.05
-    write.table(cc,"gene_SA.txt",sep = "\\t", quote = FALSE)
+    write.table(cc,"gene_SA.txt",sep = "\t", quote = FALSE)
     
     #Messenger
-    cat("\\n","NOTE:" ,"\\n","*gene_SA.txt placed in your current working directory.","\\n","*Please check to identify which gene is significantly associated with patient outcome.","\\n","*In this case, the numerator is", levels(factor(dataset[,1]))[[2]], "and the denominator is", levels(factor(dataset[,1]))[[1]], ". In other words,", levels(factor(dataset[,1]))[[1]], "is considered as the reference group.")
+    cat("\n","NOTE:" ,"\n","*gene_SA.txt placed in your current working directory.","\n","*Please check to identify which gene is significantly associated with patient outcome.","\n","*In this case, the numerator is", levels(factor(dataset[,1]))[[2]], "and the denominator is", levels(factor(dataset[,1]))[[1]], ". In other words,", levels(factor(dataset[,1]))[[1]], "is considered as the reference group.")
   } else{
     
     #run SA
@@ -181,9 +181,9 @@ function(data = NULL, time = NULL, status = NULL, Pcut = 0.05, Qcut = 0.05){
     }
     
     #Print 
-    write.table(cc,"gene_SA.txt",sep = "\\t", quote = FALSE)
+    write.table(cc,"gene_SA.txt",sep = "\t", quote = FALSE)
     
     #Messenger
-    cat("\\n","NOTE:" ,"\\n","*gene_SA.txt placed in your current working directory.","\\n","*Please check to identify which gene is significantly associated with patient outcome.","\\n","*In this case, the numerator is", paste(levels(factor(dataset[,value[1,2]]))[[2]], "and", levels(factor(dataset[,value[1,2]]))[[3]]), ", whereas the denominator is", levels(factor(dataset[,value1[1,2]]))[[1]],". In other words,", levels(factor(dataset[,value1[1,2]]))[[1]], "is considered as the reference group.")
+    cat("\n","NOTE:" ,"\n","*gene_SA.txt placed in your current working directory.","\n","*Please check to identify which gene is significantly associated with patient outcome.","\n","*In this case, the numerator is", paste(levels(factor(dataset[,value[1,2]]))[[2]], "and", levels(factor(dataset[,value[1,2]]))[[3]]), ", whereas the denominator is", levels(factor(dataset[,value1[1,2]]))[[1]],". In other words,", levels(factor(dataset[,value1[1,2]]))[[1]], "is considered as the reference group.")
   }
 }
