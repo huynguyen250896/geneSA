@@ -29,7 +29,7 @@
 #'
 #' @export
 
-function(data = NULL, time = NULL, status = NULL, Pcut = 0.05, Qcut = 0.05){
+geneSA = function(data = NULL, time = NULL, status = NULL, Pcut = 0.05, Qcut = 0.05){
   
   #Errors
   if(missing(data)){
