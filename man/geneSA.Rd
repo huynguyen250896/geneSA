@@ -23,7 +23,6 @@ is P-value <= 0.05.}
 
 \item{Qcut}{numeric. A user-defined Q-value threshold to define statistical significance level. Default value 
 is Q-value <= 0.05.}
-}
 
 \item{univariate}{boolean. Whether \code{geneSA} runs an univariate or a multivariate survival analysis. Default value is univariate = T}
 }
