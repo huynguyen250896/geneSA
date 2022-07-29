@@ -23,9 +23,11 @@
 #'
 #' @param Qcut numeric. A user-defined Q-value threshold to define significance. default value is Q-value <= 0.05.
 #'
+#' @param univariate boolean. Whether geneSA runs an univariate or a multivariate survival analysis. Default value is univariate = T.
+#'
 #' @return NULL
 #'
-#' @examples geneSA(data = exp1, time = clinical_exp$OS_MONTHS, status = clinical_exp$status, , univariate = T)
+#' @examples geneSA(data = exp1, time = clinical_exp$OS_MONTHS, status = clinical_exp$status, univariate = T)
 #'
 #' @export
 
