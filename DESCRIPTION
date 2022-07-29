@@ -1,7 +1,7 @@
 Package: geneSA
 Type: Package
 Title: Tool for Identification of genes significantly associated with prognostic value (survival rates of patients)
-Version: 0.1.7
+Version: 0.1.8
 Author: Quang-Huy Nguyen
 Maintainer: Quang-Huy Nguyen <huynguyen96.dnu@gmail.com>
 Description: a log-rank test in univariate Cox regression analysis with a proportional hazards model is performed to examine 
