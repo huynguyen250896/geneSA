@@ -29,6 +29,8 @@ P-value <= 0.05
 - Qcut: numeric. A user-defined Q-value threshold to define statistical significance level. Default value is 
 Q-value <= 0.05
 
+- univariate: boolean. Whether geneSA runs an univariate or a multivariate survival analysis. Default value is univariate = T
+
 Please see & download data [data_n_code](https://github.com/huynguyen250896/geneSA/tree/master/data_n_code) as examples to well grasp the GeneSA's requirement
 on data structure and its usage. </br> 
 
@@ -59,7 +61,8 @@ all(rownames(exp1) == rownames(clinical_exp))
 exp1 = exp1[rownames(clinical_exp),]
 
 #RUN!!!
-geneSA(data = exp1, time = clinical_exp$OS_MONTHS, status = clinical_exp$status, Pcut = 0.05, Qcut= 0.05)
+geneSA(data = exp1, time = clinical_exp$OS_MONTHS, status = clinical_exp$status, Pcut = 0.05, Qcut= 0.05, univariate = T) #univariate survival
+geneSA(data = exp1, time = clinical_exp$OS_MONTHS, status = clinical_exp$status, Pcut = 0.05, Qcut= 0.05, univariate = F) #multivariate survival
 ```
 
 #### V. What's new
