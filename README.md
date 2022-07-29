@@ -1,4 +1,4 @@
-# geneSA v0.1.6
+# geneSA v0.1.7
 #### I. Introduction
 ---
 The package geneSA is built to serve as a support tool for the paper "*[Improving existing analysis pipeline to identify and analyze cancer driver genes using multi-omics data](https://www.nature.com/articles/s41598-020-77318-1)*". </br> A log-rank test in univariate Cox regression analysis with a proportional hazards model is performed to examine an association between each gene and the survival rates of patients separately, and then adjust identified log-rank P-values following Benjamini-Hochberg FDR. Genes with adjusted log-rank P-values (also known as Q-values) <= 0.05 are preserved. </br> 
