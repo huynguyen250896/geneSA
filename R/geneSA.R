@@ -188,7 +188,7 @@ geneSA = function(data = NULL, time = NULL, status = NULL, Pcut = 0.05, Qcut = 0
       write.table(cc,"gene_SA_univariate_3.txt",sep = "\t", quote = FALSE)
       
       #Messenger
-      cat("\n","NOTE:" ,"\n","*gene_SA_univariate_3.txt stored in your current working directory.","\n","*Please check to identify which gene is significantly associated with patient outcome.","\n","*In this case, the numerator is", levels(factor(dataset[,1]))[[2]], "expression", "and the denominator is", levels(factor(dataset[,1]))[[1]], "expression.", " In other words,", levels(factor(dataset[,1]))[[1]], "expression", "is considered as the reference group.")
+      cat("\\n","NOTE:" ,"\\n","*gene_SA.txt placed in your current working directory.","\\n","*Please check to identify which gene is significantly associated with patient outcome.","\\n","*In this case, the numerator is", paste(levels(factor(dataset[,value[1,2]]))[[2]], "and", levels(factor(dataset[,value[1,2]]))[[3]]), ", whereas the denominator is", levels(factor(dataset[,value1[1,2]]))[[1]],". In other words,", levels(factor(dataset[,value1[1,2]]))[[1]], "is considered as the reference group.")
     }
   } else{ # multivariate survival analysis
     #run SA
