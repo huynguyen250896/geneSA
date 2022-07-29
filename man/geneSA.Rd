@@ -25,6 +25,9 @@ is P-value <= 0.05.}
 is Q-value <= 0.05.}
 }
 
+\item{univariate}{boolean. Whether \code{geneSA} runs an univariate or a multivariate survival analysis. Default value is univariate = T}
+}
+
 \description{
 a log-rank test in univariate Cox regression analysis with a proportional hazards model is performed to examine 
 the association between each gene and patient outcome. Genes with Q-value <= 0.05 (Benjamini-Hocberg procedure) 
@@ -33,7 +36,7 @@ Github repository: https://github.com/huynguyen250896/geneSA
 }
 
 \examples{
-geneSA(data = exp1, time = clinical_exp$OS_MONTHS, status = clinical_exp$status, Pcut = 0.05, Qcut = 0.05)
+geneSA(data = exp1, time = clinical_exp$OS_MONTHS, status = clinical_exp$status, Pcut = 0.05, Qcut = 0.05, univariate = TRUE)
 }
 
 \references{
